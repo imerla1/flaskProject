@@ -5,7 +5,7 @@ from flaskapp.models import User
 
 class RegistrationForm(FlaskForm):
     username = StringField('username', validators=[
-                           DataRequired(), length(8, 25)])
+                           DataRequired(), length(5, 25)])
     email = StringField("email", validators=[Email(), DataRequired()])
     password = PasswordField('password', validators=[DataRequired()])
     
