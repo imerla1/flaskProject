@@ -1,7 +1,9 @@
 version:
-  python_version = 3.7.3
+  python_version: 3.7.3
 
-
+super_user:
+  username: "admin"
+  password: 'admin1234'
   
 
 
