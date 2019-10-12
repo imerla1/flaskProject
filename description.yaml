@@ -1,3 +1,11 @@
+version:
+  python_version = 3.7.3
+
+
+  
+
+
+
 app:
   default_port: 5000
   server: "localhost"
