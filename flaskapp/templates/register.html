@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,54 +13,59 @@
     <!-- Main css -->
     <link rel="stylesheet" href="/static/css/register.css">
 </head>
+
 <body>
 
-    <div class="main">
-
-        <h1>Sign up</h1>
-        <div class="container">
-            <div class="sign-up-content">
-                <form method="POST" class="signup-form">
-                    {{ form.hidden_tag() }}
-                    <h2 class="form-title">Create Your Account</h2>
+    <form action="" method="post">
+        <div class="main">
 
 
-                    <div class="form-textbox">
-                        <label for="name">Username</label>
-                        {{form.username()}}
-                    </div>
+            <div class="container">
+                <div class="sign-up-content">
+                    <form method="POST" class="signup-form">
+                        {{ form.hidden_tag() }}
+                        <h2 class="form-title">Create Your Account</h2>
 
-                    <div class="form-textbox">
-                        <label for="email">Email</label>
-                        {{form.email(id="email")}}
-                    </div>
 
-                    <div class="form-textbox">
-                        <label for="pass">Password</label>
-                        {{form.password(id="pass")}}
-                    </div>
-                    
+                        <div class="form-textbox">
+                            <label for="name">Username</label>
+                            {{form.username()}}
+                        </div>
 
-                    <div class="form-group">
-                        <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
-                        <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
-                    </div>
+                        <div class="form-textbox">
+                            <label for="email">Email</label>
+                            {{form.email(id="email")}}
+                        </div>
 
-                    <div class="form-textbox">
-                        <input type="submit" name="submit" id="submit" class="submit" value="Create account" />
-                    </div>
-                </form>
+                        <div class="form-textbox">
+                            <label for="pass">Password</label>
+                            {{form.password(id="pass")}}
+                        </div>
 
-                <p class="loginhere">
-                    Already have an account ?<a href="{{ url_for('login')}}" class="loginhere-link"> Log in</a>
-                </p>
+
+                        <div class="form-group">
+                            <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                            <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all
+                                statements in <a href="#" class="term-service">Terms of service</a></label>
+                        </div>
+
+                        <div class="form-textbox">
+                            <input type="submit" name="submit" id="submit" class="submit" value="Create account" />
+                        </div>
+                    </form>
+
+                    <p class="loginhere">
+                        Already have an account ?<a href="{{ url_for('login')}}" class="loginhere-link"> Log in</a>
+                    </p>
+                </div>
             </div>
-        </div>
 
-    </div>
+        </div>
+    </form>
 
     <!-- JS -->
     <script src="/static/vendor/jquery/jquery.min.js"></script>
     <script src="/static/js/main.js"></script>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
 </html>
