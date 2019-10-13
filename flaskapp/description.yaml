@@ -5,11 +5,13 @@ super_user:
   username: "admin"
   password: 'admin1234'
   
-
+profile_image:
+  default_image: True
+  add_image: True
 
 
 app:
   default_port: 5000
   server: "localhost"
   debug: True
-  
+  web_server: False # yet
