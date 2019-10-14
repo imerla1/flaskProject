@@ -1,35 +1,51 @@
 {% extends "layout.html" %}
 {% block content %}
-    {% for post in posts.items %}
-        <article class="media content-section">
-          <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
-          <div class="media-body">
-            <div class="article-metadata">
-              <a class="mr-2" href="{{ url_for('user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
-              <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
-              
-            </div>
-            <h2><a class="article-title" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
-            
-            <p class="article-content">{{ post.content[0:300] }}</p>
-            
-            {% if len(post.content) > 300 %}
-              <p class="article-content"><a class="mr-2" href="{{ url_for('readmore', post_id=post.id)}}">Read More</a></p>
-            {%endif%}
-            <small class="text-muted"><a class="mr-2" href="">Add Comment</a></small>
-            
-          </div>
-        </article>
-    {% endfor %}
-    {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-      {% if page_num %}
-        {% if posts.page == page_num %}
-          <a class="btn btn-info mb-4" href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a>
-        {% else %}
-          <a class="btn btn-outline-info mb-4" href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a>
-        {% endif %}
-      {% else %}
-        ...
-      {% endif %}
-    {% endfor %}
+{% for post in posts.items %}
+<article class="media content-section">
+  <img class="rounded-circle article-img"
+    src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
+  <div class="media-body">
+    <div class="article-metadata">
+      <a class="mr-2" href="{{ url_for('user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
+      <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+
+    </div>
+    <h2><a class="article-title" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
+
+
+    <p class="article-content">{{ post.content[0:300] }}</p>
+
+    {% if len(post.content) > 300 %}
+    <p class="article-content"><a class="mr-2" href="{{ url_for('readmore', post_id=post.id)}}">Read More</a></p>
+    <!--Material textarea-->
+    <div class="md-form">
+      <!-- <textarea id="form7" class="md-textarea form-control" rows="3" placeholder="write a comment..."></textarea><br> -->
+      <form action="" method="POST">
+          {{ form.content(class="md-textarea form-control", placeholder='write a comment...', rows="3", id="form7")}}
+          <br>
+        
+          {{ form.submit(class="input-group-addon btn btn-primary")}}
+      </form>
+      
+     
+    </div>
+    <!--Textarea with icon prefix-->
+   
+    {%endif%}
+    <!-- <small class="text-muted"><a class="mr-2" href="">Add Comment</a></small> -->
+
+  </div>
+</article>
+{% endfor %}
+{% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+{% if page_num %}
+{% if posts.page == page_num %}
+<a class="btn btn-info mb-4" href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a>
+{% else %}
+<a class="btn btn-outline-info mb-4" href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a>
+{% endif %}
+{% else %}
+...
+{% endif %}
+{% endfor %}
 {% endblock content %}

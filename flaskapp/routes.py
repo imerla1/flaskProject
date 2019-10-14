@@ -1,6 +1,6 @@
 from flask import abort, render_template, url_for, flash, redirect, request
 from flaskapp import db, app, mail, bcrypt
-from flaskapp.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm, RequestResetForm, ResetPasswordForm
+from flaskapp.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm, RequestResetForm, ResetPasswordForm, CommentForm
 from flaskapp.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 import secrets
@@ -8,12 +8,16 @@ from PIL import Image
 import os 
 from flask_mail import Message
 
-@app.route("/")
-@app.route("/home")
+@app.route("/", methods=['GET', 'POST'])
+@app.route("/home", methods=['GET', 'POST'])
 def home():
     page = request.args.get('page', 1, type=int)
     posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
-    return render_template('home.html', posts=posts, len=len)
+    form = CommentForm()
+    if form.validate_on_submit():
+        return redirect(url_for('register'))
+    
+    return render_template('home.html', posts=posts, len=len, form=form)
 
 
 @app.route("/about")
