@@ -13,7 +13,7 @@ from flask_mail import Message
 def home():
     page = request.args.get('page', 1, type=int)
     posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
-    return render_template('home.html', posts=posts)
+    return render_template('home.html', posts=posts, len=len)
 
 
 @app.route("/about")
@@ -27,8 +27,8 @@ def register():
         return redirect(url_for('home'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        # hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(username=form.username.data, email=form.email.data, password=form.password.data)
         db.session.add(user)
         db.session.commit()
         flash('Your account has been created! You are now able to log in', 'success')
@@ -196,6 +196,24 @@ def reset_token(token):
         flash('Your password has been updated! You are now able to log in', 'success')
         return redirect(url_for('login'))
     return render_template('reset_token.html', title='Reset Password', form=form)
+
+
+@app.route('/comment/<int:post_id>')
+def comment(post_id):
+    pass
+
+@app.route('/post/<int:post_id>/readmore')
+def readmore(post_id):
+    post = Post.query.get_or_404(post_id)
+    return render_template('post.html', title=post.title, post=post)
+
+
+
+
+#TODO Post Bug Long string, Registration Failure
+
+
+
 
 @app.errorhandler(404)
 def error_404(error):

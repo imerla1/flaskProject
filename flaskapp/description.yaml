@@ -1,6 +1,7 @@
 version:
   python_version: 3.7.3
 
+  
 super_user:
   username: "admin"
   password: 'admin1234'
@@ -9,11 +10,13 @@ details:
   default_image: True
   add_image: True
   password_reset: True
-  
+  error_pages: True
+  code: "DU3M1"
+  code_number: "9454294808"
 
 app:
   default_port: 5000
   server: "localhost"
   debug: True
   web_server: False # yet
-  
+

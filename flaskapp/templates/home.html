@@ -7,9 +7,17 @@
             <div class="article-metadata">
               <a class="mr-2" href="{{ url_for('user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
               <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+              
             </div>
             <h2><a class="article-title" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
-            <p class="article-content">{{ post.content }}</p>
+            
+            <p class="article-content">{{ post.content[0:300] }}</p>
+            
+            {% if len(post.content) > 300 %}
+              <p class="article-content"><a class="mr-2" href="{{ url_for('readmore', post_id=post.id)}}">Read More</a></p>
+            {%endif%}
+            <small class="text-muted"><a class="mr-2" href="">Add Comment</a></small>
+            
           </div>
         </article>
     {% endfor %}
